@@ -1,39 +1,39 @@
-function postReward (event) {
+async function postReward (event) {
     event.preventDefault()
     let postBody = {}
-    postBody.freeItemName = $(".freeItemName").val()
-    postBody.freeItemCount = $(".freeItemCount").val()
-    postBody.freeItemType = $(".freeItemType").val()
-    postBody.freeCommandText = $(".freeCommandText").val()
-    postBody.freeCommandItem = $(".freeCommandItem").val()
-    postBody.freeCommandItemType = $(".freeCommandItemType").val()
-    postBody.freeCommandLore = $(".freeCommandLore").val()
-    postBody.freePokemon = $(".freePokemon").val()
-    postBody.freeTexture = $(".freeTexture").val()
-    postBody.freeLevel = $(".freeLevel").val()
-    postBody.freeMiniv = $(".freeMiniv").val()
-    postBody.freeNature = $(".freeNature").val()
-    postBody.premiumItemName = $(".premiumItemName").val()
-    postBody.premiumItemCount = $(".premiumItemCount").val()
-    postBody.premiumItemType = $(".premiumItemType").val()
-    postBody.premiumCommandText = $(".premiumCommandText").val()
-    postBody.premiumCommandItem = $(".premiumCommandItem").val()
-    postBody.premiumCommandItemType = $(".premiumCommandItemType").val()
-    postBody.premiumCommandLore = $(".premiumCommandLore").val()
-    postBody.premiumPokemon = $(".premiumPokemon").val()
-    postBody.premiumTexture = $(".premiumTexture").val()
-    postBody.premiumLevel = $(".premiumLevel").val()
-    postBody.premiumMiniv = $(".premiumMiniv").val()
-    postBody.premiumNature = $(".premiumNature").val()
+    postBody.freeItemName = await $(".freeItemName").val()
+    postBody.freeItemCount = await $(".freeItemCount").val()
+    postBody.freeItemType = await $(".freeItemType").val()
+    postBody.freeCommandText = await $(".freeCommandText").val()
+    postBody.freeCommandItem = await $(".freeCommandItem").val()
+    postBody.freeCommandItemType = await $(".freeCommandItemType").val()
+    postBody.freeCommandLore = await $(".freeCommandLore").val()
+    postBody.freePokemon = await $(".freePokemon").val()
+    postBody.freeTexture = await $(".freeTexture").val()
+    postBody.freeLevel = await $(".freeLevel").val()
+    postBody.freeMiniv = await $(".freeMiniv").val()
+    postBody.freeNature = await $(".freeNature").val()
+    postBody.premiumItemName = await $(".premiumItemName").val()
+    postBody.premiumItemCount = await $(".premiumItemCount").val()
+    postBody.premiumItemType = await $(".premiumItemType").val()
+    postBody.premiumCommandText = await $(".premiumCommandText").val()
+    postBody.premiumCommandItem = await $(".premiumCommandItem").val()
+    postBody.premiumCommandItemType = await $(".premiumCommandItemType").val()
+    postBody.premiumCommandLore = await $(".premiumCommandLore").val()
+    postBody.premiumPokemon = await $(".premiumPokemon").val()
+    postBody.premiumTexture = await $(".premiumTexture").val()
+    postBody.premiumLevel = await $(".premiumLevel").val()
+    postBody.premiumMiniv = await $(".premiumMiniv").val()
+    postBody.premiumNature = await $(".premiumNature").val()
 
     console.log(postBody)
-    const response = fetch('/api/rewards', {
+    const response = await fetch('/api/rewards', {
         method: 'POST',
         body: JSON.stringify(postBody),
         headers: { 'Content-Type': 'application/json' }
     })
     if(response.ok) {
-        // document.location.reload()
+        document.location.reload()
     }
 
 }

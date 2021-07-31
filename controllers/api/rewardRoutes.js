@@ -42,9 +42,6 @@ router.post("/", (req, res) => {
             if(postBody.freeTexture) {
                 specs.customTexture = postBody.freeTexture
             }
-            if(postBody.freeLevel) {
-                specs.level = postBody.freeLevel
-            }
             if(postBody.freeMiniv) {
                 specs.miniv = postBody.freeMiniv
             }
@@ -98,7 +95,7 @@ router.post("/", (req, res) => {
         const stringified = JSON.stringify(rewardsList)
         req.session.save(() => {
             req.session.rewardsList = stringified
-            res.render('homepage', { rewardsList: rewardsList, stringified: stringified });
+            res.status(200).json(req.session.rewardsList);
         })
     }
     catch (err) {
