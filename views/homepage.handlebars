@@ -1,7 +1,10 @@
     <div class="container formsDiv">
-        <form class="row blue rewardForm">
-            <h4>Free</h4>
-            <div class="col s4 green">
+        <form class="row rewardForm">
+          <div class="col s12">
+          <div class="card blue lighten-4 row">
+            <div class="card-content">
+            <span class="card-title">Free</span>
+            <div class="col s12 m4 red accent-1">
                 <span>Add item</span>
                 <div class="row">
                     <div class="input-field col s6">
@@ -21,7 +24,7 @@
                       </div>
                 </div>
             </div>
-            <div class="col s4 yellow">
+            <div class="col s12 m4 pink accent-1">
                 <span>Add Command</span>
                 <div class="row">
                     <div class="input-field col s12">
@@ -42,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col s4 purple">
+            <div class="col s12 m4 purple accent-1">
                 <span>Add Pokemon</span>
                 <div class="row">
                     <div class="input-field col s6">
@@ -62,8 +65,14 @@
                     </div>
                 </div>
             </div>
-            <h4>Premium</h4>
-            <div class="col s4 green">
+            </div>
+          </div>
+          </div>
+          <div class="col s12">
+            <div class="card row blue lighten-4">
+              <div class="card-content">
+            <span class="card-title">Premium</span>
+            <div class="col s12 m4 red accent-1">
                 <span>Add item</span>
                 <div class="row">
                     <div class="input-field col s6">
@@ -83,7 +92,7 @@
                       </div>
                 </div>
             </div>
-            <div class="col s4 yellow">
+            <div class="col s12 m4 pink accent-1">
                 <span>Add Command</span>
                 <div class="row">
                     <div class="input-field col s12">
@@ -104,7 +113,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col s4 purple">
+            <div class="col s12 m4 purple accent-1">
                 <span>Add Pokemon</span>
                 <div class="row">
                     <div class="input-field col s6">
@@ -124,6 +133,9 @@
                     </div>
                 </div>
             </div>
+              </div>
+            </div>
+          </div>
             <div class="col s12 center">
                 <button class="refresh btn waves-effect waves-light red accent-1" type="submit">Add Reward</button>
             </div>
@@ -131,8 +143,11 @@
         
 
     </div>
-
-<p>{{stringified}}</p>
-{{#each rewardsList as |reward|}}
-{{> reward-list}}
-{{/each}}
+    <div class="container">
+      <pre class = "grey lighten-4">
+        <code>{{stringified}}</code>
+      </pre>
+      {{#each rewardsList as |reward|}}
+      {{> reward-list}}
+      {{/each}}
+    </div>
