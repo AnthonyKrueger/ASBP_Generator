@@ -84,6 +84,12 @@ async function clearAll() {
     }
 }
 
+function copyJson() {
+    const jsonText = $(".jsonText").val()
+    $(".jsonText").select()
+    document.execCommand("copy")
+}
+
 function toggleView() {
     const jsonView = $(".jsonView")
     const viewBtn = $(".viewBtn")
@@ -127,8 +133,8 @@ function toggleImport() {
 const rewardForm = $(".rewardForm")
 rewardForm.bind('submit', postReward)
 
-const clearButton = $(".clearBtn")
-clearButton.bind('click', clearAll)
+const clearBtn = $(".clearBtn")
+clearBtn.bind('click', clearAll)
 
 const viewBtn = $(".viewBtn")
 viewBtn.bind('click', toggleView)
@@ -138,3 +144,6 @@ importBtn.bind('click', toggleImport)
 
 const importForm = $(".importForm")
 importForm.bind('submit', submitImport)
+
+const copyBtn = $(".copyBtn")
+copyBtn.bind("click", copyJson)
