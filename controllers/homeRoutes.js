@@ -6,6 +6,13 @@ router.get('/', async(req, res) => {
         let parsedRewards = []
         if(stringList) {
             parsedRewards = JSON.parse(stringList)
+            parsedRewards.sort(function(a, b) {
+                let keyA = a.index
+                let keyB = b.index
+                if(keyA < keyB) return -1;
+                if(keyA > keyB) return 1;
+                return 0;
+            })
         }
         else {
             const rewardsList = []

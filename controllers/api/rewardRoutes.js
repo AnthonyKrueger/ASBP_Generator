@@ -10,7 +10,12 @@ router.post("/", (req, res) => {
             rewardsList = JSON.parse(req.session.rewardsList)
         }
         const newReward = new Reward
-        newReward.initReward(rewardsList.length + 1)
+        if(postBody.index) {
+            newReward.initReward(postBody.index)
+        }
+        else {
+            newReward.initReward(rewardsList.length + 1)
+        }
 
         if(postBody.freeItemName != "") {
             let count = 1
@@ -91,7 +96,17 @@ router.post("/", (req, res) => {
             }
             newReward.addPokemon("premium", postBody.premiumPokemon, specs)
         }
+        rewardsList = rewardsList.filter(reward => {
+            return reward.index != postBody.index
+        })
         rewardsList.push(newReward)
+        rewardsList.sort(function(a, b) {
+            let keyA = a.index
+            let keyB = b.index
+            if(keyA < keyB) return -1;
+            if(keyA > keyB) return 1;
+            return 0;
+        })
         const stringified = JSON.stringify(rewardsList)
         req.session.save(() => {
             req.session.rewardsList = stringified

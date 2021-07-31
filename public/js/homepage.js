@@ -25,6 +25,7 @@ async function postReward (event) {
     postBody.premiumLevel = await $(".premiumLevel").val()
     postBody.premiumMiniv = await $(".premiumMiniv").val()
     postBody.premiumNature = await $(".premiumNature").val()
+    postBody.index = await $(".index").val()
 
     console.log(postBody)
     const response = await fetch('/api/rewards', {
@@ -36,6 +37,10 @@ async function postReward (event) {
         document.location.reload()
     }
 
+}
+
+async function clearAll() {
+    const response = fetch('/api/rewards')
 }
 
 const rewardForm = $(".rewardForm")
