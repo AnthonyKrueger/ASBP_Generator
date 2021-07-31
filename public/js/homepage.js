@@ -1,3 +1,6 @@
+let jsonShowing = false;
+let importShowing = false;
+
 async function postReward (event) {
     event.preventDefault()
     let postBody = {}
@@ -48,8 +51,30 @@ async function clearAll() {
     }
 }
 
+function toggleView() {
+    const jsonView = $(".jsonView")
+    const viewBtn = $(".viewBtn")
+    if(jsonShowing) {
+        jsonView.addClass("hide")
+        viewBtn.html("View/Copy Json")
+        jsonShowing = false
+    }
+    else {
+        jsonView.removeClass("hide")
+        viewBtn.html("Hide Json")
+        jsonShowing = true
+    }
+}
+
+function toggleImport() {
+
+}
+
 const rewardForm = $(".rewardForm")
 rewardForm.bind('submit', postReward)
 
 const clearButton = $(".clearBtn")
 clearButton.bind('click', clearAll)
+
+const viewBtn = $(".viewBtn")
+viewBtn.bind('click', toggleView)
