@@ -1,3 +1,15 @@
+let jsonShowing = false;
+let importShowing = false;
+
+function isJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
+
 async function postReward (event) {
     event.preventDefault()
     let postBody = {}
@@ -39,6 +51,30 @@ async function postReward (event) {
 
 }
 
+async function submitImport(event) {
+    event.preventDefault()
+    let importText = await $("#importText").val()
+    if(isJsonString(importText)) {
+        importText = JSON.parse(importText)
+        const response = await fetch("/api/rewards/import", {
+            method: "POST",
+            body: JSON.stringify(importText),
+            headers: { 'Content-Type': 'application/json' }
+        })
+        if(response.ok) {
+            document.location.reload()
+        }
+        else {
+            alert("Json Import Failed");
+            return;
+        }
+    }
+    else {
+        alert("Not a valid JSON object");
+        return;
+    }
+}
+
 async function clearAll() {
     const response = await fetch('/api/rewards', {
         method: 'DELETE'
@@ -48,8 +84,57 @@ async function clearAll() {
     }
 }
 
+function toggleView() {
+    const jsonView = $(".jsonView")
+    const viewBtn = $(".viewBtn")
+    if(importShowing) {
+        toggleImport()
+    }
+    if(jsonShowing) {
+        jsonView.addClass("hide")
+        viewBtn.html("View/Copy Json")
+        jsonShowing = false
+    }
+    else {
+        jsonView.removeClass("hide")
+        viewBtn.html("Hide Json")
+        jsonShowing = true
+    }
+}
+
+function toggleImport() {
+    if(jsonShowing) {
+        toggleView()
+    }
+    const importView = $(".importView")
+    const importBtn = $(".importBtn")
+    if(importShowing) {
+        importView.addClass("hide")
+        importBtn.html("Import JSON")
+        importShowing = false
+    }
+    else {
+        importView.removeClass("hide")
+        importBtn.html("Cancel Import")
+        importShowing = true
+    }
+}
+
+
+
+
+
 const rewardForm = $(".rewardForm")
 rewardForm.bind('submit', postReward)
 
 const clearButton = $(".clearBtn")
 clearButton.bind('click', clearAll)
+
+const viewBtn = $(".viewBtn")
+viewBtn.bind('click', toggleView)
+
+const importBtn = $(".importBtn")
+importBtn.bind('click', toggleImport)
+
+const importForm = $(".importForm")
+importForm.bind('submit', submitImport)

@@ -120,6 +120,20 @@ router.post("/", (req, res) => {
 
 })
 
+router.post("/import", (req, res) => {
+    try {
+        const rewardsList = req.body
+        req.session.save(() => {
+            req.session.rewardsList = JSON.stringify(rewardsList)
+            res.status(200).json(req.session.rewardsList);
+        })
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+})
+
 router.delete("/", (req, res) => {
     try {
         req.session.destroy()
