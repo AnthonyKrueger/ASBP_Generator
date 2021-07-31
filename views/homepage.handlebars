@@ -138,35 +138,50 @@
     </div>
     <div class="col s12 blue lighten-2 center">
       <div class="row center">
-    <div class="input-field col s3 center">
-      <input placeholder="Index to Update" type="text" class="index">
-    </div>
+        <div class="input-field col s3 center">
+          <input placeholder="Index to Update" type="text" class="index">
+        </div>
       </div>
-    <div class="row center">
-    <div class="col s3 center">
-      <button class="addBtn btn waves-effect waves-light purple darken-1" type="submit">Add Reward</button>
-    </div>
-    <div class="col s3 center">
-      <button class="importBtn btn waves-effect waves-light purple darken-1" type="button">Import JSON</button>
-    </div>
-    <div class="col s3 center">
-      <button class="viewBtn btn waves-effect waves-light purple darken-1" type="button">View/Copy JSON</button>
-    </div>
-    <div class="col s3 center">
-      <button class="clearBtn btn waves-effect waves-light red accent-3" type="button">Clear All</button>
-    </div>
-    </div>
+      <div class="row center">
+        <div class="col s3 center">
+          <button class="addBtn btn waves-effect waves-light purple darken-1" type="submit">Add Reward</button>
+        </div>
+        <div class="col s3 center">
+          <button class="importBtn btn waves-effect waves-light purple darken-1" type="button">Import JSON</button>
+        </div>
+        <div class="col s3 center">
+          <button class="viewBtn btn waves-effect waves-light purple darken-1" type="button">View/Copy JSON</button>
+        </div>
+        <div class="col s3 center">
+          <button class="clearBtn btn waves-effect waves-light red accent-3" type="button">Clear All</button>
+        </div>
+      </div>
 
     </div>
   </form>
 
 
 </div>
-<div class="container jsonView hide">
-  <pre class="grey lighten-4">
+<div class="container row">
+  <div class="col s12 jsonView hide">
+    <pre class="grey lighten-4">
         <code>{{stringified}}</code>
       </pre>
-  {{#each rewardsList as |reward|}}
-  {{> reward-list}}
-  {{/each}}
+  </div>
+  <div class="col s12 importView hide">
+    <form class="row grey lighten-4 importForm">
+      <div class="col s10">
+        <div class="input-field">
+          <textarea id="importText" class="materialize-textarea"></textarea>
+          <label for="textarea1">Paste JSON Here</label>
+        </div>
+      </div>
+      <div class="col s2">
+        <button class="submitImport btn waves-effect purple darken-1" type="submit">Import</button>
+      </div>
+    </form>
+  </div>
+    {{#each rewardsList as |reward|}}
+    {{> reward-list}}
+    {{/each}}
 </div>
