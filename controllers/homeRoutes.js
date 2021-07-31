@@ -1,5 +1,4 @@
 const router = require('express').Router()
-const {Reward} = require('../models')
 
 router.get('/', async(req, res) => {
     try {
@@ -7,7 +6,6 @@ router.get('/', async(req, res) => {
         let parsedRewards = []
         if(stringList) {
             parsedRewards = JSON.parse(stringList)
-            console.log("String List:" + stringList + "Parsed List:" + parsedRewards)
         }
         else {
             const rewardsList = []
@@ -15,7 +13,7 @@ router.get('/', async(req, res) => {
         }
         req.session.save(() => {
             req.session.rewardsList = stringList
-            res.render('homepage', {rewardsList: parsedRewards, stringified: stringList});
+            res.render('homepage', {rewardsList: parsedRewards, stringified: JSON.stringify(parsedRewards, null, 4)});
           })
 
     }
@@ -27,7 +25,6 @@ router.get('/', async(req, res) => {
 
 router.put('/', async(req, res) => {
     const rewardsList = req.body
-    console.log(rewardsList)
     res.render('homepage', {rewardsList: rewardsList, stringified: req.body})
 })
 
