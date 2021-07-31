@@ -40,8 +40,16 @@ async function postReward (event) {
 }
 
 async function clearAll() {
-    const response = fetch('/api/rewards')
+    const response = await fetch('/api/rewards', {
+        method: 'DELETE'
+    })
+    if(response.ok) {
+        document.location.reload()
+    }
 }
 
 const rewardForm = $(".rewardForm")
 rewardForm.bind('submit', postReward)
+
+const clearButton = $(".clearBtn")
+clearButton.bind('click', clearAll)

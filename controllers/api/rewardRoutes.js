@@ -6,7 +6,7 @@ router.post("/", (req, res) => {
         const postBody = req.body
         console.log(postBody)
         let rewardsList = []
-        if (req.session.rewardsList) {
+        if (req.session.rewardsList && req.session.rewardsList != []) {
             rewardsList = JSON.parse(req.session.rewardsList)
         }
         const newReward = new Reward
@@ -118,6 +118,17 @@ router.post("/", (req, res) => {
         res.status(500).json(err)
     }
 
+})
+
+router.delete("/", (req, res) => {
+    try {
+        req.session.destroy()
+        res.status(200).json("deleted")
+    }
+    catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
 })
 
 module.exports = router;
