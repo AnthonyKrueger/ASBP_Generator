@@ -127,7 +127,13 @@ router.post("/import", (req, res) => {
     try {
         const rewardsList = req.body
         const testReward = new Reward;
-        if(compareKeys(testReward, rewardsList[0])) {
+        let brokenJson = false;
+        rewardsList.forEach((reward, index) => {
+            if(!compareKeys(testReward, rewardsList[index])) {
+                brokenJson = true;
+            }
+        })
+        if(!brokenJson) {
             req.session.save(() => {
                 req.session.rewardsList = JSON.stringify(rewardsList)
                 res.status(200).json(req.session.rewardsList);
