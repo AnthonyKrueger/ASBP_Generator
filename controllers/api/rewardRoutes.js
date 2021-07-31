@@ -1,10 +1,10 @@
 const { Reward } = require('../../models')
+const {compareKeys} = require('../../utils/formatters')
 const router = require('express').Router()
 
 router.post("/", (req, res) => {
     try {
         const postBody = req.body
-        console.log(postBody)
         let rewardsList = []
         if (req.session.rewardsList && req.session.rewardsList != []) {
             rewardsList = JSON.parse(req.session.rewardsList)
@@ -13,8 +13,11 @@ router.post("/", (req, res) => {
         if(postBody.index) {
             newReward.initReward(postBody.index)
         }
+        else if(rewardsList.length > 0) {
+            newReward.initReward(parseInt(rewardsList[rewardsList.length - 1].index) + 1)
+        }
         else {
-            newReward.initReward(rewardsList.length + 1)
+            newReward.initReward(1)
         }
 
         if(postBody.freeItemName != "") {
@@ -123,10 +126,16 @@ router.post("/", (req, res) => {
 router.post("/import", (req, res) => {
     try {
         const rewardsList = req.body
-        req.session.save(() => {
-            req.session.rewardsList = JSON.stringify(rewardsList)
-            res.status(200).json(req.session.rewardsList);
-        })
+        const testReward = new Reward;
+        if(compareKeys(testReward, rewardsList[0])) {
+            req.session.save(() => {
+                req.session.rewardsList = JSON.stringify(rewardsList)
+                res.status(200).json(req.session.rewardsList);
+            })
+        }
+        else {
+            res.status(400).json("import failed")
+        }
     }
     catch (err) {
         console.log(err)

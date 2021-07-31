@@ -31,6 +31,8 @@ class Reward {
       this.index = index
       this.rewards.free.display.name = `Level ${this.index} Reward`
       this.rewards.premium.display.name = `Level ${this.index} Premium Reward`
+      this.rewards.free.message = `You Have Claimed Your Level ${this.index} Reward!`
+      this.rewards.premium.message = `You Have Claimed Your Level ${this.index} Premium Reward!`
   }
 
   addItem(bptype, source, item, amount) {
