@@ -87,6 +87,7 @@ async function clearAll() {
 function copyJson() {
     const jsonText = $(".jsonText").val()
     $(".jsonText").select()
+    console.log("copied")
     document.execCommand("copy")
 }
 
